@@ -147,12 +147,26 @@ public class QuartosController : BaseController
         return RedirectToAction("Index");
     }
 
+    /// <summary>
+    /// Método responsável por obter uma lista de quartos com a informação daquele hotel
+    /// </summary>
+    /// <returns>Retorna um array de QuartoViewModel</returns>
     private async Task<IEnumerable<QuartoViewModel>> ObterQuartosHotels() => 
         _mapper.Map<IEnumerable<QuartoViewModel>>(await _quartoRepository.ObterQuartosHotels());
 
+    /// <summary>
+    /// Método responsável por retornar um quarto e o hotel a quem ele pertence
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>Retorna um QuartoViewModel</returns>
     private async Task<QuartoViewModel> ObterQuarto(Guid id) => 
         _mapper.Map<QuartoViewModel>(await _quartoRepository.ObterQuartoHotel(id));
 
+    /// <summary>
+    /// Método responsável por popular os hotels do parâmetro Hotels
+    /// </summary>
+    /// <param name="quartoViewModel"></param>
+    /// <returns>Retorna um QuartoViewModel com o atributo Hotels preenchido</returns>
     private async Task<QuartoViewModel> PopularHotels(QuartoViewModel quartoViewModel)
     {
         var hotels = _mapper.Map<IEnumerable<HotelViewModel>>(await _hotelRepository.ObterTodos());
@@ -162,6 +176,12 @@ public class QuartosController : BaseController
         return quartoViewModel;
     }
 
+    /// <summary>
+    /// Método responsável por realizar o upload do arquivo para a pasta wwwroot/imagens do projeto
+    /// </summary>
+    /// <param name="arquivo"></param>
+    /// <param name="imgPrefixo"></param>
+    /// <returns>True se o upload foi feito com sucesso, caso contrário false</returns>
     private async Task<bool> UploadArquivo(IFormFile arquivo, string imgPrefixo)
     {
         if (arquivo.Length <= 0) 

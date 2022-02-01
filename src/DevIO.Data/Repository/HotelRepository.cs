@@ -1,4 +1,5 @@
-﻿using DevIO.Business.Interfaces;
+﻿#nullable disable
+using DevIO.Business.Interfaces;
 using DevIO.Business.Models;
 using DevIO.Data.Context;
 using Microsoft.EntityFrameworkCore;
