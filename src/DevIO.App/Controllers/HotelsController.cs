@@ -133,9 +133,19 @@ public class HotelsController : BaseController
         return RedirectToAction(nameof(Index));
     }
 
+    /// <summary>
+    /// Método responsável por obter o Hotel e os quartos dele
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns>Retorna um HotelViewModel com todos os parâmetros preenchidos e os quartos do hotel</returns>
     public async Task<HotelViewModel> ObterHotelQuartos(Guid id) => 
         _mapper.Map<HotelViewModel>(await _hotelRepository.ObterHotelQuartos(id));
 
+    /// <summary>
+    /// Método responsável por popular os quartos dos hoteis
+    /// </summary>
+    /// <param name="hotelViewModel"></param>
+    /// <returns>Retorna um HotelViewModel com o atributo Quartos preenchido</returns>
     public async Task<HotelViewModel> PopularQuartos(HotelViewModel hotelViewModel)
     {
         var quartosViewModels = _mapper.Map<IEnumerable<QuartoViewModel>>(await _quartoRepository.ObterQuartosPorHotel(hotelViewModel.Id));
@@ -145,6 +155,12 @@ public class HotelsController : BaseController
         return hotelViewModel;
     }
 
+    /// <summary>
+    /// Método responsável por realizar o upload do arquivo para a pasta wwwroot/imagens do projeto
+    /// </summary>
+    /// <param name="arquivo"></param>
+    /// <param name="imgPrefixo"></param>
+    /// <returns>True se o upload foi feito com sucesso, caso contrário false</returns>
     private async Task<bool> UploadArquivo(IFormFile arquivo, string imgPrefixo)
     {
         if (arquivo.Length <= 0) 
