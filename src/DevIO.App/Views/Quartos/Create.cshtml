@@ -1,0 +1,73 @@
+﻿@model DevIO.App.ViewModels.QuartoViewModel
+
+@{
+    ViewData["Title"] = "Novo Quarto";
+}
+
+<h3 style="padding-top: 50px">@ViewData["Title"]</h3>
+<hr />
+
+<div class="row">
+    <div class="col-md-10">
+        <form enctype="multipart/form-data" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HotelId" class="control-label"></label>
+                <select asp-for="HotelId" class="form-control" asp-items="@(new SelectList(Model?.Hotels, "Id", "Nome"))">
+                    <option></option>
+                </select>
+                <span asp-validation-for="HotelId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroOcupantes" class="control-label"></label>
+                <input asp-for="NumeroOcupantes" class="form-control" />
+                <span asp-validation-for="NumeroOcupantes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroDeAdultos" class="control-label"></label>
+                <input asp-for="NumeroDeAdultos" class="form-control" />
+                <span asp-validation-for="NumeroDeAdultos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroDeCriancas" class="control-label"></label>
+                <input asp-for="NumeroDeCriancas" class="form-control" />
+                <span asp-validation-for="NumeroDeCriancas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Preco" class="control-label"></label>
+                <input asp-for="Preco" class="form-control" />
+                <span asp-validation-for="Preco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FotosUpload" class="control-label"></label>
+
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="FotosUpload" asp-for="FotosUpload">
+                    <label data-browse="Procurar" style="width: 400px" class="custom-file-label" for="FotosUpload"></label>
+                    <label style="display: none" id="img_nome"></label>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                <a class="btn btn-info" asp-action="Index">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $("#FotosUpload").change(function () {
+            $("#img_nome").text(this.files[0].name);
+            $("#img_nome")[0].style.display = 'block';
+        });
+    </script>
+}

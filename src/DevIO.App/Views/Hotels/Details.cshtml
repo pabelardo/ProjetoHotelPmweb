@@ -1,0 +1,45 @@
+﻿@model DevIO.App.ViewModels.HotelViewModel
+
+@{
+    ViewData["Title"] = "Detalhes do Hotel";
+}
+
+<h3 style="padding-top: 50px">@ViewData["Title"]</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <img src="~/imagens/@Model.Fotos" alt="@Model.Fotos" style="width: 300px; height: 428px" />
+    </div>
+    <div class="col-md-6">
+        <dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.CNPJ)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CNPJ)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Endereco)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Endereco)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Descricao)
+            </dd>
+        </dl>
+        <div>
+            <a supress-by-claim-name="Produto" supress-by-claim-value="Editar" class="btn btn-dark" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+            <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+        </div>
+    </div>
+</div>

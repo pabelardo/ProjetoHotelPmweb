@@ -1,0 +1,22 @@
+﻿BEGIN TRANSACTION;
+GO
+
+ALTER TABLE [QUARTOS] DROP CONSTRAINT [FK_QUARTOS_HOTELS_IdHotel];
+GO
+
+EXEC sp_rename N'[QUARTOS].[IdHotel]', N'HotelId', N'COLUMN';
+GO
+
+EXEC sp_rename N'[QUARTOS].[IX_QUARTOS_IdHotel]', N'IX_QUARTOS_HotelId', N'INDEX';
+GO
+
+ALTER TABLE [QUARTOS] ADD CONSTRAINT [FK_QUARTOS_HOTELS_HotelId] FOREIGN KEY ([HotelId]) REFERENCES [HOTELS] ([Id]) ON DELETE NO ACTION;
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20220201015145_AlteradoNomenclaturaDaForeignKeyDaClasseQuarto', N'6.0.1');
+GO
+
+COMMIT;
+GO
+
